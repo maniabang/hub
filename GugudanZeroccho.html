@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title></title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div> <!-- 결과 : <div id="root"><button>Like<button></div>-->
+    <script type="text/babel">
+
+        // 변화될 값을 state화
+        // constructor 없어도 된다    
+
+        const e = React.createElement;
+        class GuGuDan extends React.Component {
+
+            state = {
+                first: Math.ceil(Math.random() * 9),
+                second: Math.ceil(Math.random() * 9),
+                value: '',
+                result: '',
+            };
+            
+
+            onSubmit = (e) => {
+                e.preventDefault();
+                if (parseInt(this.state.value) === this.state.first * this.state.second) {
+                    this.setState( (prevState) => {
+                        return{
+                            result: '정답: '+prevState.value,
+                            first: Math.ceil(Math.random() * 9),
+                            second: Math.ceil(Math.random() * 9),
+                            value: '',
+                        }; 
+                    });
+                } else {
+                    this.setState({
+                        result: '틀렸습니다. 정답은 '+this.state.first * this.state.second+'입니다.',
+                        value: '',
+                    });
+                }
+            };
+
+            onChange=(e) => {
+                this.setState({ value: e.target.value });
+            }
+            input;
+
+            // 필요 없는 div 제거 <React.Fragment>
+            // 컨텐츠 5*(2+3) 같은 그룹 연산자
+            
+            // 직접 만들어진 함수는 무조건 화살표 함수 써야한다.
+            // 컨텐츠
+
+            render() {
+                return (
+                    <React.Fragment> 
+                        <div>{this.state.first}곱하기{this.state.second}는?</div>
+                        <form onSubmit={this.onSubmit}>
+                            <input ref={(c)=> {this.input = c;}} type="number" value={this.state.value} 
+                            onChange={this.onChange} />
+                            <button>입력!</button>
+                        </form>
+                        <div>{this.state.result}</div>
+                    </React.Fragment>
+                );
+            }
+        }
+                    // <button type="submit" onClick={() => {this.setState({liked:true})}}>
+                    //     {this.state.liked === true ? 'Liked' : '좋아요'}    
+                    // </button>;
+
+                    // JSX (JS + XML)
+
+                    // e(
+                    //     'button', 
+                    //     { onClick: () => { this.setState({ liked : true })}, type: 'submit'}, 
+                    //     this.state.liked === true ? 'Liked' : 'Like',
+                    // );
+    </script>
+    <script type="text/babel">
+        ReactDOM.render(<GuGuDan />, document.querySelector('#root'));
+    </script>
+</body>
+
+</html>
