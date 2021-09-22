@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+// 5-6 useEffect 핵심 정리
 
 const rspCoords = {
   바위: '0',

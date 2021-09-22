@@ -56,6 +56,7 @@ class RSP extends Component {
     }
   };
 
+  // React에서 많이 쓰는 패턴 5-4 강의 참조
   onClickBtn = (choice) => () => {
     const {imgCoord} = this.state;
     clearInterval(this.interval);
@@ -92,6 +93,8 @@ class RSP extends Component {
       <>
         <div id="computer" style={{ background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0` }} />
         <div>
+          {/* <button id="rock" className="btn" onClick={() => this.onClickBtn('바위')}>바위</button> => 5-4 강의 참조*/}
+          
           <button id="rock" className="btn" onClick={this.onClickBtn('바위')}>바위</button>
           <button id="scissor" className="btn" onClick={this.onClickBtn('가위')}>가위</button>
           <button id="paper" className="btn" onClick={this.onClickBtn('보')}>보</button>
