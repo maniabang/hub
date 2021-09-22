@@ -4,7 +4,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = {
   name: 'number-baseball-dev',
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'eval',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -23,7 +23,9 @@ module.exports = {
           }],
           '@babel/preset-react',
         ],
-        plugins: ['react-refresh/babel'],
+        plugins: [
+          '@babel/plugin-proposal-class-properties',
+          'react-hot-loader/babel'],
       },
       exclude: path.join(__dirname, 'node_modules'),
     }],
@@ -33,7 +35,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: 'app.js',
     publicPath: '/dist',
   },
   devServer: {

@@ -80,6 +80,7 @@ class NumberBaseball extends Component {
   inputRef = createRef(); // this.inputRef
 
   render() {
+    // render 안에는 setState 쓰는게 아님
     const { result, value, tries } = this.state;
     return (
       <>
